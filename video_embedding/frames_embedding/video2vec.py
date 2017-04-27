@@ -7,16 +7,18 @@
 # 2017-04-19 by fengyoung(fengyoung1982@sina.com)
 #
 
-import tensorflow as tf
-import numpy as np
-import os
 import sys
+sys.path.append("../")
+
+import os
 import json
 import time
 from functools import reduce
+import tensorflow as tf
+import numpy as np
 import fcnn
-import util
-import vmpattern_reader as vmp_reader
+from comm import util
+import vmpattern_reader_v2 as vmp_reader
 
 
 def save_features(mids, feats, out_file, append = True):
@@ -82,7 +84,7 @@ def feat_detect_demo(model_path, vmpattern_path, out_file, batch_size = 1, vmpat
 		if len(vmpattern_files) == 0:
 			print("Error: path \"%s\" is empty or not exist!" % vmpattern_path) 
 			return
-		mid_batch, y_0, x = vmp_reader.prepare_read_from_pattern(vmpattern_files, batch_size = batch_size, max_epochs = 1, shuffle = False)
+		mid_batch, y_0, x = vmp_reader.prepare_read_from_pattern(vmpattern_files, fcnn_model.arch["out_size"], batch_size = batch_size, max_epochs = 1, shuffle = False)
 	else: 
 		print("Error: unrecognized suffix \"%s\"" % vmpatt_file_suffix)
 		return

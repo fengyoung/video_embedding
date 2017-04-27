@@ -7,15 +7,17 @@
 # 2017-04-19 by fengyoung(fengyoung1982@sina.com)
 #
 
-import tensorflow as tf
-import numpy as np
-import os
 import sys
+sys.path.append("../")
+
+import os
 import json
 import time
+import tensorflow as tf
+import numpy as np
+from comm import util
+import vmpattern_reader_v2 as vmp_reader
 import fcnn
-import util
-import vmpattern_reader as vmp_reader
 
 
 def test_demo(model_path, vmpattern_path, vmpatt_file_suffix = 'tfrecord'):
@@ -45,7 +47,7 @@ def test_demo(model_path, vmpattern_path, vmpatt_file_suffix = 'tfrecord'):
 		if len(vmpattern_files) == 0:
 			print("Error: path \"%s\" is empty or not exist!" % vmpattern_path) 
 			return
-		mids, y_0, x = vmp_reader.prepare_read_from_pattern(vmpattern_files, batch_size = 1, max_epochs = 1, shuffle = False)
+		mids, y_0, x = vmp_reader.prepare_read_from_pattern(vmpattern_files, fcnn_model.arch["out_size"], batch_size = 1, max_epochs = 1, shuffle = False)
 	else: 
 		print("Error: unrecognized suffix \"%s\"" % vmpatt_file_suffix)
 		return

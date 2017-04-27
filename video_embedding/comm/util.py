@@ -8,7 +8,7 @@
 import os
 import string
 import time
-
+import functools
 
 def get_filenames(path, suffix = None): 
 	"""Get name of files in target path with special suffix.
@@ -69,4 +69,24 @@ def LOG(info_str, ltype = "INFO"):
 			fp.close()
 	else:
 		return True
+
+
+def number_list_to_string(num_list, delimiter = ','):  
+	"""Converts number list to a string splitted by special delimiter
+
+	Args: 
+		num_list: A list of numbers. 
+	    delimiter: A `string`. delimiter charactors
+
+	Returns:
+		String which contains the number list elements
+	"""
+	if len(num_list) == 0:
+		return ""
+	elif len(num_list) == 1:
+		return str(num_list[0])
+	else:
+		return functools.reduce(lambda x, y: str(x) + delimiter + str(y), num_list)
+
+
 

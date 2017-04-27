@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*- 
 # file: collect_labels.py 
+#
 
 import sys
+sys.path.append("../")
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import os
 import functools
 import time
 import numpy as np
-import util
+from comm import util
 import json
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 
 def parse_tagged_filename(filename): 

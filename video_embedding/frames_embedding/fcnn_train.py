@@ -7,15 +7,17 @@
 # 2017-04-19 by fengyoung(fengyoung1982@sina.com)
 #
 
-import tensorflow as tf
-import numpy as np
-import os
 import sys
+sys.path.append("../")
+
+import os
 import json
 import time
 import fcnn
-import util
-import vmpattern_reader as vmp_reader
+import tensorflow as tf
+import numpy as np
+from comm import util
+import vmpattern_reader_v2 as vmp_reader
 
 
 def read_config(config_file):
@@ -77,7 +79,7 @@ def train_demo(config_file, vmpattern_path, out_model_path, vmpatt_file_suffix =
 		mids, y_0, x = vmp_reader.prepare_read_from_tfrecord(vmpattern_files, arch_params["out_size"], arch_params["in_height"], arch_params["in_width"],   
 			batch_size = train_params["batch_size"], max_epochs = train_params["max_epochs"], shuffle = train_params["shuffle"])
 	elif vmpatt_file_suffix == 'pattern':
-		mids, y_0, x = vmp_reader.prepare_read_from_pattern(vmpattern_files, 
+		mids, y_0, x = vmp_reader.prepare_read_from_pattern(vmpattern_files, arch_params["out_size"],  
 			batch_size = train_params["batch_size"], max_epochs = train_params["max_epochs"], shuffle = train_params["shuffle"])
 	else: 
 		print("Error: unrecognized suffix \"%s\"" % vmpatt_file_suffix)
@@ -181,7 +183,7 @@ def train_demo(config_file, vmpattern_path, out_model_path, vmpatt_file_suffix =
 
 if __name__ == '__main__':
 	if len(sys.argv) != 4 and len(sys.argv) != 5: 
-		print("usage: fcnn_train.py <config_file> <vmpattern_path> <out_model_path> <|log_file>")
+		print("usage: fcnn_train.py <config_file> <vmpattern_path(!!tfrecord only)> <out_model_path> <|log_file>")
 		exit(-1)
 	
 	if len(sys.argv) == 5:

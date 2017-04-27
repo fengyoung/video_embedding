@@ -2,13 +2,15 @@
 # file: vfeature_confirm.py 
 
 import sys
+sys.path.append("../")
+
 import os
 import functools
 import time
 import json
 import numpy as np
 import tensorflow as tf
-import util
+from comm import util
 
 
 def read_mid2cateid_file(mid2cateid_label_file): 
@@ -19,7 +21,7 @@ def read_mid2cateid_file(mid2cateid_label_file):
 			if len(line.rstrip()) == 0: 
 				continue
 			s = line.rstrip().split('\t')
-			mid2cateid[s[0]] = list(map(lambda x: float(x), s[1].split(',')))
+			mid2cateid[s[0]] = list(map(lambda x: int(x), s[1].split(',')))
 		return mid2cateid	
 	except IOError as err: 
 		print("IO Error: %d" % err)
@@ -71,7 +73,7 @@ def read_vfeature_extend(path, filename):
 
 
 def random_vmp_file_name(suffix):
-	return 'vmpattern_' + time.strftime("%Y%m%d%H%M%S") + '_' + str(np.random.randint(10000, 99999)) + '.' + suffix
+	return 'vmp_' + time.strftime("%Y%m%d%H%M%S") + '_' + str(np.random.randint(10000, 99999)) + '.' + suffix
 	
 
 def confirm_to_pattern(vfeature_path, padding_to, mid2cateid, out_path, in_suffix = 'vfeature'): 
@@ -79,7 +81,7 @@ def confirm_to_pattern(vfeature_path, padding_to, mid2cateid, out_path, in_suffi
 	mid,label0_label1_...._labelm,height_width,x0_x1_x2_..._xn
 	"""
 	if os.path.exists(out_path):
-		print("Error: dir [%s] is exist!" % out_path)
+		print("Error: dir \"%s\" is exist!" % out_path)
 		return False
 	os.makedirs(out_path)
 
@@ -93,11 +95,14 @@ def confirm_to_pattern(vfeature_path, padding_to, mid2cateid, out_path, in_suffi
 			if len(video_vecs) == 0:
 				print("(%d) mid: %s | ERROR: video_vecs is NULL" % (num + 1, mid))
 			else:
-				if (cnt + 1) % 100 == 0:
+				if (cnt + 1) % 64 == 0:
 					fp.close()
 					fp = open(os.path.join(out_path, random_vmp_file_name('pattern')), 'w')
 				fp.write(mid)
-				fp.write(',' + functools.reduce(lambda x, y: str(x) + '_' + str(y), mid2cateid[mid]))
+				if len(mid2cateid[mid]) == 1:
+					fp.write(',' + str(mid2cateid[mid][0]))
+				else:
+					fp.write(',' + functools.reduce(lambda x, y: str(x) + '_' + str(y), mid2cateid[mid]))
 				fp.write(',' + str(padding_to) + '_' + str(width))
 				if height < padding_to:
 					fp.write(',' + functools.reduce(lambda x, y: str(x) + '_' + str(y), video_vecs))
@@ -122,8 +127,7 @@ def confirm_to_tfrecord(vfeature_path, padding_to, mid2cateid, out_path, in_suff
 	os.makedirs(out_path)
 
 	num = 0
-	cnt = 0
-	rec_num = 0
+	num_rec = 0
 	MIN_HEIGHT = 15
 
 	writer = tf.python_io.TFRecordWriter(os.path.join(out_path, random_vmp_file_name('tfrecord')))
@@ -134,30 +138,32 @@ def confirm_to_tfrecord(vfeature_path, padding_to, mid2cateid, out_path, in_suff
 			if height < MIN_HEIGHT: 
 				print("(%d) mid: %s | ERROR: video_vecs is NULL or too short" % (num + 1, mid))
 			else: 
-				if (cnt + 1) % 100 == 0:
-					writer.close()
-					writer = tf.python_io.TFRecordWriter(os.path.join(out_path, random_vmp_file_name('tfrecord')))
 				off = 0
 				while off + MIN_HEIGHT < height:
+					if (num_rec + 1) % 128 == 0:
+						writer.close()
+						writer = tf.python_io.TFRecordWriter(os.path.join(out_path, random_vmp_file_name('tfrecord')))
 					if off + padding_to < height:
 						vecs = video_vecs[off:(off+padding_to)]
-						print("(%d|%d) mid: %s, height: %d, off: %d | %d vecs" % (num + 1, rec_num + 1, mid, height, off, len(vecs)))
+						print("(%d|%d) mid: %s, height: %d, off: %d | %d vecs" % (num + 1, num_rec + 1, mid, height, off, len(vecs)))
 					else:	
 						vecs = video_vecs[off:height] + [[0.] * width] * (off + padding_to - height)
-						print("(%d|%d) mid: %s, height: %d, off: %d | %d vecs, %d paddings" % (num + 1, rec_num + 1, mid, height, off, len(vecs), off + padding_to - height))
+						print("(%d|%d) mid: %s, height: %d, off: %d | %d vecs, %d paddings" % (num + 1, num_rec + 1, mid, height, off, len(vecs), off + padding_to - height))
+					
+					
 					example = tf.train.Example(features = tf.train.Features(feature={
 						"mid": tf.train.Feature(bytes_list = tf.train.BytesList(value = [str.encode(mid)])),
 						"off": tf.train.Feature(int64_list = tf.train.Int64List(value = [off])),
-						"label": tf.train.Feature(float_list = tf.train.FloatList(value = mid2cateid[mid])),
+						#"label": tf.train.Feature(int64_list = tf.train.Int64List(value = mid2cateid[mid])),
+						"label": tf.train.Feature(bytes_list = tf.train.BytesList(value = [str.encode(util.number_list_to_string(mid2cateid[mid], '_'))])),
 						"size": tf.train.Feature(int64_list = tf.train.Int64List(value = [padding_to, width])),   	
 						"feature": tf.train.Feature(float_list = tf.train.FloatList(value = np.reshape(vecs, [-1])))
 						}))
 					writer.write(example.SerializeToString())
 					off += MIN_HEIGHT
-					rec_num += 1
-				cnt += 1
+					num_rec += 1
 		else:
-			print("(%d|%d) mid: %s | ERROR: no cate labels" % (num + 1, rec_num + 1, mid))
+			print("(%d|%d) mid: %s | ERROR: no cate labels" % (num + 1, num_rec + 1, mid))
 		num += 1
 	writer.close()
 	return True

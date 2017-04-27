@@ -1,33 +1,35 @@
 # -*- coding: utf-8 -*- 
-# file: collect_labels.py 
+# file: mid_to_cateid.py 
+#
 
 import sys
+sys.path.append("../")
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import os
 import functools
 import time
 import numpy as np
-import util
+from comm import util
 import json
 import codecs
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 
 def load_label_dict(label_map_file):
 	try:
-		label_num = 0
+		num_labels = 0
 		label_dict = {}
 		fp = open(label_map_file, 'r')
 		for line in fp:
 			if len(line.rstrip()) > 0: 
 				s = line.rstrip().split('\t')
 				label_id = int(s[0])
-				if label_num <= label_id:
-					label_num = label_id + 1
+				if num_labels <= label_id:
+					num_labels = label_id + 1
 				for label in s[1].split(','):
 					label_dict[label.decode('utf-8')] = label_id
-		return (label_num, label_dict)	
+		return (num_labels, label_dict)	
 	except IOError as err:
 		print("IO Error: " + str(err))			
 		return None
@@ -54,15 +56,18 @@ def parse_tagged_filename(filename):
 	return (cates, tags, titles, mid)
  
 
-
-def label_encode(labels, label_dict, label_num):
-	ids = [0] * label_num
+def label_encode(labels, label_dict, num_labels):
+	#ids = [0] * num_labels
+	ids = []
 	if len(labels) == 0:
 		return None
 	else:
 		for label in labels:
 			if label.decode('utf-8') in label_dict: 
-				ids[label_dict[label]] = 1
+				#ids[label_dict[label.decode('utf-8')]] = 1
+				ids.append(label_dict[label.decode('utf-8')]) 
+	if len(ids) == 0:
+		return None
 	return ids
 
 
@@ -81,7 +86,7 @@ def mid2cateid_from_jsonfile(label_json_file, cate_dict, cate_num):
 				for c in d["categories"]:
 						cates.append(c["category"])
 			cate_id = label_encode(cates, cate_dict, cate_num)
-			if cate_id:
+			if cate_id: 
 				mid2cateid[mid] = cate_id
 		return mid2cateid
 	
@@ -97,7 +102,7 @@ def mid2cateid_from_filename(path, cate_dict, cate_num, suffix):
 	for filename in util.get_filenames(path, suffix): 
 		cates, tags, titles, mid = parse_tagged_filename(filename)
 		cate_id = label_encode(cates, cate_dict, cate_num)
-		if cate_id:
+		if cate_id: 
 			mid2cateid[mid] = cate_id
 	return mid2cateid
 
@@ -106,7 +111,10 @@ def save_mid2cateid(mid2cateid, out_file):
 	try:
 		fp = open(out_file, 'w')
 		for k,v in mid2cateid.items():
-			fp.write(str(k) + '\t' + functools.reduce(lambda x, y: str(x) + ',' + str(y), v) + '\n')
+			if len(v) == 1: 
+				fp.write(str(k) + '\t' + str(v[0]) + '\n')
+			else: 
+				fp.write(str(k) + '\t' + functools.reduce(lambda x, y: str(x) + ',' + str(y), v) + '\n')
 		return True	
 	except IOError as err:
 		print("IO Error: " + str(err))			
