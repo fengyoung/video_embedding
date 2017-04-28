@@ -31,7 +31,7 @@ You can find the example of configure in ./config
 
 The proto of configure is as following: 
 
----------------------------------------------------------
+'''
 {
 	"fcnn_arch":	# FCNN architecture parameters 
 	{
@@ -65,8 +65,7 @@ The proto of configure is as following:
 		"epsilon": 0.1 
 	}
 }
----------------------------------------------------------
-
+'''
 
 
 ## 3. Important
