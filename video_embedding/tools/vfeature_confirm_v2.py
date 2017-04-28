@@ -72,10 +72,6 @@ def read_vfeature_extend(path, filename):
 		fp.close()
 
 
-def random_vmp_file_name(suffix):
-	return 'vmp_' + time.strftime("%Y%m%d%H%M%S") + '_' + str(np.random.randint(10000, 99999)) + '.' + suffix
-	
-
 def confirm_to_pattern(vfeature_path, padding_to, mid2cateid, out_path, in_suffix = 'vfeature'): 
 	"""
 	mid,label0_label1_...._labelm,height_width,x0_x1_x2_..._xn
@@ -87,7 +83,7 @@ def confirm_to_pattern(vfeature_path, padding_to, mid2cateid, out_path, in_suffi
 
 	num = 0
 	cnt = 0
-	fp = open(os.path.join(out_path, random_vmp_file_name('pattern')), 'w')
+	fp = open(os.path.join(out_path, util.random_vmp_file_name(prefix = 'vmp', suffix = 'pattern')), 'w')
 	for filename in util.get_filenames(vfeature_path, in_suffix): 
 		mid = filename.split('.')[0].split('+')[-1]
 		if mid in mid2cateid:
@@ -97,7 +93,7 @@ def confirm_to_pattern(vfeature_path, padding_to, mid2cateid, out_path, in_suffi
 			else:
 				if (cnt + 1) % 64 == 0:
 					fp.close()
-					fp = open(os.path.join(out_path, random_vmp_file_name('pattern')), 'w')
+					fp = open(os.path.join(out_path, util.random_vmp_file_name(prefix = 'vmp', suffix = 'pattern')), 'w')
 				fp.write(mid)
 				if len(mid2cateid[mid]) == 1:
 					fp.write(',' + str(mid2cateid[mid][0]))
@@ -122,7 +118,7 @@ def confirm_to_pattern(vfeature_path, padding_to, mid2cateid, out_path, in_suffi
 
 def confirm_to_tfrecord(vfeature_path, padding_to, mid2cateid, out_path, in_suffix = 'vfeature'): 
 	if os.path.exists(out_path):
-		print("Error: dir [%s] is exist!" % out_path)
+		print("Error: dir \"%s\" is exist!" % out_path)
 		return False
 	os.makedirs(out_path)
 
@@ -130,7 +126,7 @@ def confirm_to_tfrecord(vfeature_path, padding_to, mid2cateid, out_path, in_suff
 	num_rec = 0
 	MIN_HEIGHT = 15
 
-	writer = tf.python_io.TFRecordWriter(os.path.join(out_path, random_vmp_file_name('tfrecord')))
+	writer = tf.python_io.TFRecordWriter(os.path.join(out_path, util.random_vmp_file_name(prefix = 'vmp', suffix = 'tfrecord')))
 	for filename in util.get_filenames(vfeature_path, in_suffix): 
 		mid = filename.split('.')[0].split('+')[-1]
 		if mid in mid2cateid:
@@ -142,7 +138,7 @@ def confirm_to_tfrecord(vfeature_path, padding_to, mid2cateid, out_path, in_suff
 				while off + MIN_HEIGHT < height:
 					if (num_rec + 1) % 128 == 0:
 						writer.close()
-						writer = tf.python_io.TFRecordWriter(os.path.join(out_path, random_vmp_file_name('tfrecord')))
+						writer = tf.python_io.TFRecordWriter(os.path.join(out_path, util.random_vmp_file_name(prefix = 'vmp', suffix = 'tfrecord')))
 					if off + padding_to < height:
 						vecs = video_vecs[off:(off+padding_to)]
 						print("(%d|%d) mid: %s, height: %d, off: %d | %d vecs" % (num + 1, num_rec + 1, mid, height, off, len(vecs)))

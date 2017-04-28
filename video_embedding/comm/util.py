@@ -9,6 +9,8 @@ import os
 import string
 import time
 import functools
+import numpy as np
+
 
 def get_filenames(path, suffix = None): 
 	"""Get name of files in target path with special suffix.
@@ -88,5 +90,9 @@ def number_list_to_string(num_list, delimiter = ','):
 	else:
 		return functools.reduce(lambda x, y: str(x) + delimiter + str(y), num_list)
 
+
+def random_vmp_file_name(prefix, suffix):
+	return prefix + '_' + time.strftime("%Y%m%d%H%M%S") + '_' + str(np.random.randint(10000, 99999)) + '.' + suffix
+	
 
 

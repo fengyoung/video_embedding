@@ -149,10 +149,11 @@ def test_auc():
 
 if __name__ == '__main__':
 	#test_prepare_read_from_pattern("../../data/weibo_vfeature_MCN_14k_confirm30_pattern_v1/") 
-	test_prepare_read_from_pattern_v2("../../data/weibo_vfeature_MCN_14k_confirm30_pattern_v2/") 
+	#test_prepare_read_from_pattern_v2("../../data/weibo_vfeature_MCN_14k_confirm30_pattern_v2/") 
 	
 	#test_prepare_read_from_tfrecord("../../data/weibo_vfeature_MCN_14k_confirm30_tfrecord_v1/") 
 	#test_prepare_read_from_tfrecord_v2("../../data/weibo_vfeature_MCN_14k_confirm30_tfrecord_v2_2/") 
+	test_prepare_read_from_tfrecord_v2("../tools/01/")
 
 	exit(0)
 

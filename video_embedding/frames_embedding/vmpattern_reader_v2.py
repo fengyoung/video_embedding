@@ -133,6 +133,14 @@ def prepare_read_from_tfrecord(tfrecord_files, num_labels, v_height, v_width, ba
 		    }
 		  }
 		  feature: {
+		    key: "off"
+		    value: {
+		      int64_list: {
+		        value: [segment offset] 
+		      }
+		    }
+		  }
+		  feature: {
 		    key: "label"
 		    value: {
 		      bytes_list: {
