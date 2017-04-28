@@ -13,10 +13,10 @@
  |- model
  |   |- mcn_14k_c30_fcnn_model	# a completed FCNN model based on 14,000 weibo MCN videos
  |
- |- video_embedding   # source code in python
+ |- video_embedding   # source code in python 
      |- comm		  # comm package
-     |- frames_embedding  # implement of frames embedding
-     |- tools         # some useful tools for label collection, format converting, ...
+	 |- frames_embedding  # implement of frames embedding
+	 |- tools         # some useful tools for label collection, format converting, ...
 
 
 ## 2. How to Use
