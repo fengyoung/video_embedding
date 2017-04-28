@@ -20,7 +20,7 @@ This is Video Embedding based on Tensorflow & FCNN(Frames Supported Convolution 
 
 ### 2.1 Configure
 
-You can find the example of configure in ./config
+You can find the example of configure in ***./config***
 
 The proto of configure is as following: 
 
@@ -70,9 +70,9 @@ cd ./video_embedding/
 python3.4 fcnn_train.py ../../config/video2vec_fcnn_config.json ../../data/wb_14k_h30w2048_tfrecord_v2_part/ ./out_model 
 ```
 
-The model would be trained from video-matrix pattern data in "../../data/wb_14k_h30w2048_tfrecord_v2_part/", and output to "./out_model".
+The model would be trained from video-matrix pattern data in *"../../data/wb_14k_h30w2048_tfrecord_v2_part/"*, and output to *"./out_model"*.
 
-"../../config/video2vec_fcnn_config.json" is the configure file. 
+*"../../config/video2vec_fcnn_config.json"* is the configure file. 
 
 
 
@@ -85,11 +85,11 @@ cd ./video_embedding/
 python3.4 fcnn_pred.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30w2048_pattern_v2_part pattern
 ```
 
-"../../model/mcn_14k_c30_fcnn_model/" is a prepared FCNN model. 
+*"../../model/mcn_14k_c30_fcnn_model/"* is a prepared FCNN model. 
 
-"../../data/wb_14k_h30w2048_pattern_v2_part" is the testing samples path.
+*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the testing samples path.
 
-"pattern" indicates the suffix of file in samples path
+*"pattern"* indicates the suffix of file in samples path
 
 
 ### 2.4 Video-Level Feature Extraction (Video2Vec)
@@ -101,13 +101,13 @@ cd ./video_embedding/
 python3.4 video2vec.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30w2048_pattern_v2_part pattern ./video_vec.out
 ```
 
-"../../model/mcn_14k_c30_fcnn_model/" is a prepared FCNN model. 
+*"../../model/mcn_14k_c30_fcnn_model/"* is a prepared FCNN model. 
 
-"../../data/wb_14k_h30w2048_pattern_v2_part" is the testing samples path.
+*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the testing samples path.
 
-"pattern" indicates the suffix of file in samples path
+*"pattern"* indicates the suffix of file in samples path
 
-"./video_vec.out" is the out file 
+*"./video_vec.out"* is the out file 
 
 
 ## 3. Important
