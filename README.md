@@ -1,6 +1,6 @@
 # Video-Embedding
 
-This is Video Embedding based on Tensorflow & FCNN(Frames Supported Convolution Neural Network) 
+This is Video Embedding based on ***Tensorflow*** & ***FCNN(Frames Supported Convolution Neural Network)*** 
 
 
 ## 1. List
@@ -87,7 +87,7 @@ python3.4 fcnn_pred.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30
 
 *"../../model/mcn_14k_c30_fcnn_model/"* is a prepared FCNN model. 
 
-*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the testing samples path.
+*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the path of testing samples. 
 
 *"pattern"* indicates the suffix of file in samples path
 
@@ -103,7 +103,7 @@ python3.4 video2vec.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30
 
 *"../../model/mcn_14k_c30_fcnn_model/"* is a prepared FCNN model. 
 
-*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the testing samples path.
+*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the path of testing samples
 
 *"pattern"* indicates the suffix of file in samples path
 
@@ -112,5 +112,61 @@ python3.4 video2vec.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30
 
 ## 3. Important
 
+There are two supported types of the Video-Matrix Patterns (VMP): pattern-string & tfrecord-example 
 
+### 3.1 Pattern-String proto
+
+```
+mid,0_0_1_0...0_0,height_width,x0_x1_x2_..._xn
+mid,0_1_1_0...0_0,height_width,x0_x1_x2_..._xn
+...
+```
+
+### 3.2 Tfrecord-Example proto
+
+
+```
+features: {
+	feature: {
+		key: "mid"
+		value: {
+			bytes_list: {
+				value: [mid string]
+			}
+		}
+	}
+	feature: {
+		key: "off"
+		value: {
+			int64_list: {
+			value: [segment offset] 
+			}
+		}
+	}
+	feature: {
+		key: "label"
+		value: {
+			float_list: {
+			value: [num_labels float values of 0. or 1.] 
+			}
+		}
+	}
+	feature: {
+		key: "size"
+		value: {
+			int64_list: {
+				value: [v_height, v_width]
+			}
+		}
+	}
+	feature: {
+		key: "feature"
+		value: {
+			float_list: {
+			value: [(v_height * width) float features]
+			}
+		}
+	}
+}
+```
 
