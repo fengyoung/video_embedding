@@ -114,15 +114,15 @@ python3.4 video2vec.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30
 
 There are two supported types of the Video-Matrix Patterns (VMP): pattern-string & tfrecord-example 
 
-### 3.1 Pattern-String proto
+### 3.1 Pattern-String proto (v2)
 
 ```
-mid,0_0_1_0...0_0,height_width,x0_x1_x2_..._xn
-mid,0_1_1_0...0_0,height_width,x0_x1_x2_..._xn
+mid,labelid0_labelid1_labelid2,height_width,x0_x1_x2_..._xn
+mid,labelid2_labelid5,height_width,x0_x1_x2_..._xn
 ...
 ```
 
-### 3.2 Tfrecord-Example proto
+### 3.2 Tfrecord-Example proto (v2)
 
 
 ```
@@ -139,15 +139,15 @@ features: {
 		key: "off"
 		value: {
 			int64_list: {
-			value: [segment offset] 
+				value: [segment offset] 
 			}
 		}
 	}
 	feature: {
 		key: "label"
 		value: {
-			float_list: {
-			value: [num_labels float values of 0. or 1.] 
+			bytes_list: {
+				value: ["0,3,7"]    # labelid list string 
 			}
 		}
 	}
