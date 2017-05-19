@@ -2,7 +2,7 @@
 # file: video2vec.py 
 # python3 supported only 
 # 
-# Implement of video level feature vector extraction based on FCNN. 
+# Implement of video level feature vector extraction from video-matrix based on FCNN. 
 # 
 # 2017-04-19 by fengyoung(fengyoung1982@sina.com)
 #
