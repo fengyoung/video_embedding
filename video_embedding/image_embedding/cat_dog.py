@@ -1,19 +1,16 @@
 import sys
+sys.path.append("../")
+
 import os
 import numpy as np
+import image_retrival
 
 
-def cosine_sim(v1, v2):
-	if len(v1) != len(v2):
-		return False
-	cos = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
-	return 0.5 + 0.5 * cos
 
-def euclidean_sim(v1, v2):
-	if len(v1) != len(v2):
-		return False
-	euc_dist = np.linalg.norm(v1 - v2)
-	return 1.0 / (1.0 + euc_dist)
+def cat_dog_demo(feats_train):
+	image_feats = image_retrieval.read_features("./model/02.feats")
+
+
 
 
 def read_features(image_feat_file):
