@@ -11,7 +11,7 @@ import numpy as np
 def cosine_sim(v1, v2):
 	"""Similary based on Consine
 
-	Arg: 
+	Args: 
 		v1/v2: a list of float. feature vector
 
 	Returns:
@@ -26,7 +26,7 @@ def cosine_sim(v1, v2):
 def euclidean_sim(v1, v2):
 	"""Similary based on Euclidean Distance. 
 
-	Arg: 
+	Args: 
 		v1/v2: a list of float. feature vector
 
 	Returns:
@@ -41,7 +41,7 @@ def euclidean_sim(v1, v2):
 def manhattan_sim(v1, v2):
 	"""Manhattan Similary
 
-	Arg: 
+	Args: 
 		v1/v2: a list of float. feature vector
 
 	Returns:
@@ -56,7 +56,7 @@ def manhattan_sim(v1, v2):
 def chebyshev_sim(v1, v2):
 	"""Chebyshev Similary
 
-	Arg: 
+	Args: 
 		v1/v2: a list of float. feature vector
 
 	Returns:
