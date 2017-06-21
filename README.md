@@ -1,33 +1,38 @@
 # Video-Embedding
 
-This is Video Embedding based on ***Tensorflow*** & ***FCNN(Frames Supported Convolution Neural Network)*** 
+This is Implement of Video Embedding based on ***Tensorflow, Inception-V3 & FCNN(Frames Supported Convolution Neural Network)*** 
 
-## Requirements
+## 1. Requirements
 
 - Python 3.x
 - Tensorflow >= 1.0
 
-## Installation
+## 2. Installation
 
-**1. Install TensorFlow**
+**(1) Install TensorFlow**
 
 See [Installing TensorFlow](https://www.tensorflow.org/install/) for instructions on how to install the release binaries or how to build from source.
 
-**2. Clone the source of video_embedding**
+**(2) Clone the source of video_embedding**
 
 ```
-git clone https://github.com/fengyoung/image_style_tf_py3.git <YOUR REPO PATH>
+git clone https://github.com/fengyoung/video_embedding.git <YOUR REPO PATH>
 ```
 
-## How to Use
+## 3. How to Use Trained Model to Embed a Video To A Video-Matrix and Video-Vec
 
-### Image Embedding
-
-
+### 3.1 Video Decoding and Frame Images Extraction
 
 
 
-### Frames Embedding
+
+### 3.2 Image Embedding
+
+
+
+
+
+### 3.3 Frames Embedding
 
 
 
