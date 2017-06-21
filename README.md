@@ -19,6 +19,23 @@ See [Installing TensorFlow](https://www.tensorflow.org/install/) for instruction
 git clone https://github.com/fengyoung/image_style_tf_py3.git <YOUR REPO PATH>
 ```
 
+## How to Use
+
+### Image Embedding
+
+
+
+
+
+### Frames Embedding
+
+
+
+
+
+
+
+
 ## 1. List
 
 ```
