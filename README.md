@@ -2,6 +2,22 @@
 
 This is Video Embedding based on ***Tensorflow*** & ***FCNN(Frames Supported Convolution Neural Network)*** 
 
+## Requirements
+
+- Python 3.x
+- Tensorflow >= 1.0
+
+## Installation
+
+**1. Install TensorFlow**
+
+See [Installing TensorFlow](https://www.tensorflow.org/install/) for instructions on how to install the release binaries or how to build from source.
+
+**2. Clone the source of video_embedding**
+
+```
+git clone https://github.com/fengyoung/image_style_tf_py3.git <YOUR REPO PATH>
+```
 
 ## 1. List
 
