@@ -19,7 +19,11 @@ See [Installing TensorFlow](https://www.tensorflow.org/install/) for instruction
 git clone https://github.com/fengyoung/video_embedding.git <YOUR REPO PATH>
 ```
 
-## 3. How to Use Trained Model to Embed a Video To A Video-Matrix and Video-Vec
+## 3. How to Use Trained Model
+
+There 2-levels operations in Video Embedding: ***Image Embedding & Frames Embedding***. 
+
+***Image Embedding*** extracts features from each frame image of the input video. So you should decode the video first, and extraction some frame iamges before embedding. The operation of ***Image Embedding*** could 
 
 ### 3.1 Video Decoding and Frame Images Extraction
 
