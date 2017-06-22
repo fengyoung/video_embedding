@@ -19,33 +19,7 @@ See [Installing TensorFlow](https://www.tensorflow.org/install/) for instruction
 git clone https://github.com/fengyoung/video_embedding.git <YOUR REPO PATH>
 ```
 
-## 3. How to Use Trained Model
-
-There 2-levels operations in Video Embedding: ***Image Embedding & Frames Embedding***. 
-
-***Image Embedding*** extracts features from each frame image of the input video. So you should decode the video first, and extraction some frame iamges before embedding. The operation of ***Image Embedding*** could 
-
-### 3.1 Video Decoding and Frame Images Extraction
-
-
-
-
-### 3.2 Image Embedding
-
-
-
-
-
-### 3.3 Frames Embedding
-
-
-
-
-
-
-
-
-## 1. List
+## 3. List
 
 ```
 ./config	                       		 // config examples
@@ -59,9 +33,9 @@ There 2-levels operations in Video Embedding: ***Image Embedding & Frames Embedd
 ./video_embedding/tools                  // some useful tools for label collection, format converting, ...
 ```
 
-## 2. How to Use
+## 4. How to Use
 
-### 2.1 Configure
+### 4.1 Configure
 
 You can find the example of configure in ***./config***
 
@@ -104,7 +78,7 @@ The proto of configure is as following:
 ```
 
 
-### 2.2 Training a FCNN model
+### 4.2 Training a FCNN model
 
 You can excute following shells to train an FCNN model for example. 
 
@@ -119,7 +93,7 @@ The model would be trained from video-matrix pattern data in *"../../data/wb_14k
 
 
 
-### 2.3 Classification
+### 4.3 Classification
 
 You can excute following shells to classify each sample from pattern files. 
 
@@ -135,7 +109,7 @@ python3.4 fcnn_pred.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30
 *"pattern"* indicates the suffix of file in samples path
 
 
-### 2.4 Video-Level Feature Extraction (Video2Vec)
+### 4.4 Video-Level Feature Extraction (Video2Vec)
 
 You can excute following shells to extract the Video-Vec from pattern files. 
 
@@ -153,11 +127,11 @@ python3.4 video2vec.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30
 *"./video_vec.out"* is the out file 
 
 
-## 3. Important
+## 5. Important
 
 There are two supported types of the Video-Matrix Patterns (VMP): pattern-string & tfrecord-example 
 
-### 3.1 Pattern-String proto (v2)
+### 5.1 Pattern-String proto (v2)
 
 ```
 mid,labelid0_labelid1_labelid2,height_width,x0_x1_x2_..._xn
@@ -165,7 +139,7 @@ mid,labelid2_labelid5,height_width,x0_x1_x2_..._xn
 ...
 ```
 
-### 3.2 Tfrecord-Example proto (v2)
+### 5.2 Tfrecord-Example proto (v2)
 
 
 ```
