@@ -2,10 +2,13 @@
 
 This is Implement of Video Embedding based on ***Tensorflow, Inception-V3 & FCNN(Frames Supported Convolution Neural Network)*** 
 
+[image text](https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/video_embedding_01.jpeg)
+
 ## 1. Requirements
 
 - Python 3.x
 - Tensorflow >= 1.0
+- OpenCV >= 3.2
 
 ## 2. Installation
 
@@ -13,13 +16,32 @@ This is Implement of Video Embedding based on ***Tensorflow, Inception-V3 & FCNN
 
 See [Installing TensorFlow](https://www.tensorflow.org/install/) for instructions on how to install the release binaries or how to build from source.
 
+**(2) Install OpenCV on Python
+
+You can find the introduction and Download link at [OpenCV-3.2](http://opencv.org/opencv-3-2.html) or other websites. Choose the right version (over version 3.2) to install on your enverimant. 
+
 **(2) Clone the source of video_embedding**
 
 ```
 git clone https://github.com/fengyoung/video_embedding.git <YOUR REPO PATH>
 ```
 
-## 3. List
+## 3. How to Use
+
+### 3.1 Video Features Extraction
+There are 2 levels of features in 
+
+### 3.2 Video Classification
+
+### 3.3 FCNN Training
+
+
+
+
+
+
+
+
 
 ```
 ./config	                       		 // config examples
