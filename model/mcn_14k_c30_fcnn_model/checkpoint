@@ -1,6 +1,0 @@
-model_checkpoint_path: "video2vec_fcnn.cpkt-16192"
-all_model_checkpoint_paths: "video2vec_fcnn.cpkt-15800"
-all_model_checkpoint_paths: "video2vec_fcnn.cpkt-15900"
-all_model_checkpoint_paths: "video2vec_fcnn.cpkt-16000"
-all_model_checkpoint_paths: "video2vec_fcnn.cpkt-16100"
-all_model_checkpoint_paths: "video2vec_fcnn.cpkt-16192"
