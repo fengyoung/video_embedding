@@ -11,7 +11,7 @@ However, we don't need the frame details in some video applications, for example
 
 The new CNN, which is called **FCNN (Frames Supported Convolution Neural Network)**, contains 6 *f_conv* layers, 1 *densely connect* layer and 1 *softmax* layer. The output of densely connect layer (the last layer before softmax) is the Video-Vector. FCNN is trained by using Weibo-MCN classificated data-set, and it also can be used for video classification.
 
-![figure-2. The architecture of FCNN](https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/fcnn_arch.jpeg)
+![figure-2. The architecture of FCNN](https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/fcnn_arch.jpg)
 ***figure-2. The architecture of FCNN***
 
 ## 1. Requirements
