@@ -85,7 +85,7 @@ You can construct your own classification video data set, extract Video-Matrices
 ```
 python train_fcnn.py --vmp_path <VMP_PATH> --naming <NAMING> --model_path <MODEL_PATH> --epoch 100 --batch_size 10
 ```
-Then copy \<MODEL_PATH\>/\<NAMEING\>/video_embedding_fcnn.ckpt-done as the final FCNN model. 
+Then copy *\<MODEL_PATH\>/\<NAMEING\>/video_embedding_fcnn.ckpt-done* as the final FCNN model. 
 
 Arguments of "train_fcnn.py" are as follow:
 ```
