@@ -24,8 +24,6 @@ tf.app.flags.DEFINE_string('input_file', '', 'Input vmp file. Pattern-string pro
 tf.app.flags.DEFINE_string('fcnn_model', '', 'FCNN model file')
 tf.app.flags.DEFINE_string('output_file', '', 'Output video-vec file. Pattern-string proto supported only')
 
-tf.app.flags.DEFINE_integer('batch_size', '1', 'Default is 1')
-
 FLAGS = tf.app.flags.FLAGS
 
 
