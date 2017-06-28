@@ -83,8 +83,10 @@ Then predicted probilities and corresponding classes would be printed on the scr
 
 You can construct your own classification video data set, extract Video-Matrices and generate VMP files in tfrecord proto as your own training set. Or you can use **Weibo-MCN Video-Mat-Set**, which provided before, to train a new FCNN model. Like: 
 ```
-python train_fcnn.py --vmp_path <VMP path> --naming <NAMING> --model_path <MODEL_PATH> --epoch 100 --batch_size 10
+python train_fcnn.py --vmp_path <VMP_PATH> --naming <NAMING> --model_path <MODEL_PATH> --epoch 100 --batch_size 10
 ```
+Then copy \<MODEL_PATH\>/\<NAMEING\>/video_embedding_fcnn.ckpt-done as the final FCNN model. 
+
 Arguments of "train_fcnn.py" are as follow:
 ```
 --vmp_path VMP_PATH
