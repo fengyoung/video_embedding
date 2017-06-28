@@ -52,9 +52,13 @@ Some resources and testing models are provided, such as:
 There are 2 types of features extraction to get **Video-Matrix** & **Video-Vector** respectively: 
 
 (1) The Video-Matrix could be extracted from a video file by using "video2mat.py" like: 
-
 ```
-python --graph_file 
+cd <THIS REPO>
+python video2mat.py --graph_file <inception-v3 graph file> --input <short video file> --output <video-matrix file>
+```
+You can find other argumets of "video2mat.py" by: 
+```
+python video2mat.py -h
 ```
 
 ### 3.2 Video Classification
