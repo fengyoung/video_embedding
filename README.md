@@ -2,7 +2,7 @@
 
 This is Implement of Video Embedding based on ***Tensorflow, Inception-V3 & FCNN(Frames Supported Convolution Neural Network)*** 
 
-Video Embeding can be interpreted as the processing of **Video Features Extraction**. As following figure, a video consisits of a lots of images (named *frame*). Each frame contants image concept, and these concept can be organized to a matrix in time sequence (we call it **Video-Matrix**). Video-Matrix can be used for representing the content of the video in frame leval details. The extraction of Video-Matrix is as the same as image embedding. We choose Inception-v3 to solve it.
+Video Embeding can be interpreted as the processing of **Video Features Extraction**. As following figure, a video consisits of a lots of images (named *frame*). Each frame contants image concept, and these concept can be organized to a matrix in time sequence (we call it **Video-Matrix**) which can be used for representing the content of the video in frame leval details. The extraction of Video-Matrix is as the same as image embedding. We choose Inception-v3 to solve it.
 
 However, we don't need the frame details in some video applications, for example, Video-Retrieval, Recommendation etc. So we prepose a new CNN to compress the 2-D Video-Matrix to a 1-D **Video-Vector**. The new CNN, which is called **FCNN (Frames Supported Convolution Neural Network)**, contains 6 *f_conv* layers, 1 *densely connect* layer and 1 *softmax* layer. The output of densely connect layer (the last layer before softmax) is the Video-Vector. FCNN is trained by using Weibo-MCN classificated data-set, and it also can be used for video classification.
 
