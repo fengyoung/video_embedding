@@ -56,7 +56,7 @@ There are 2 types of features extraction to get **Video-Matrix** & **Video-Vecto
 cd <THIS REPO>
 python video2mat.py --graph_file <inception-v3 graph file> --input <video file> --output <output video-matrix file>
 ```
-You can get the usage and argumets description by using "-h", like: 
+You can get the usage and argumets description using "-h", like: 
 ```
 python video2mat.py -h
 ```
