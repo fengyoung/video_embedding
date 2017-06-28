@@ -40,8 +40,22 @@ git clone https://github.com/fengyoung/video_embedding.git <YOUR REPO PATH>
 
 ## 3. How to Use
 
+Some resources and testing models are provided, such as:
+[Graph file of Inception-v3](http://pan.baidu.com/s/1qYjWy4G)
+
+
+
+
+
 ### 3.1 Video Features Extraction
-There are 2 levels of video features: **Video-Matrix** & **Video-Vector**,  
+
+There are 2 types of features extraction to get **Video-Matrix** & **Video-Vector** respectively: 
+
+(1) The Video-Matrix could be extracted from a video file by using "video2mat.py" like: 
+
+```
+python --graph_file 
+```
 
 ### 3.2 Video Classification
 
