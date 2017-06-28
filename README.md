@@ -20,7 +20,7 @@ However, we don't need the frame details in some video applications, for example
 
 See [Installing TensorFlow](https://www.tensorflow.org/install/) for instructions on how to install the release binaries or how to build from source.
 
-**(2) Install OpenCV on Python
+**(2) Install OpenCV on Python**
 
 You can find the introduction and Download link at [OpenCV-3.2](http://opencv.org/opencv-3-2.html) or other websites. Choose the right version (over version 3.2) to install on your enverimant. 
 
