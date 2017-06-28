@@ -43,9 +43,9 @@ git clone https://github.com/fengyoung/video_embedding.git <YOUR REPO PATH>
 Some resources and testing models are provided, such as:
 
 - [Inception-v3](http://pan.baidu.com/s/1qYjWy4G): Graph file of inception-v3. 
-- [FCNN model](): trained FCNN model based on Weibo-MCN Classification data set. 
+- [FCNN model](http://pan.baidu.com/s/1nuS16Ud): trained FCNN model based on Weibo-MCN Classification data set. 
 - [2 short videos](http://pan.baidu.com/s/1qYDc8pQ): short videos for testing of features extraction or classification. 
-- [Weibo-MCN Video-Mat-Set](): 60,000+ video-matrices of Weibo-MCN classification data set in format of tfrecord proto. 
+- [Weibo-MCN Video-Mat-Set](http://pan.baidu.com/s/1pK8KFGJ): 60,000+ video-matrices of Weibo-MCN classification data set in format of tfrecord proto. 
 
 ### 3.1 Video Features Extraction
 
@@ -77,7 +77,7 @@ FCNN could be used for video classification. The example is "video_classify.py":
 ```
 python video_classify.py --graph_file <inception-v3 graph file> --fcnn_model <FCNN model file> --input_file <video file>
 ```
-Then predicted probilities and corresponding classes would be printed on the screen. Each class is encode to a ingeter ID, you can find the mapping between IDs and classes in [Weibo CateID mapping]() 
+Then predicted probilities and corresponding classes would be printed on the screen. Each class is encode to a ingeter ID, you can find the mapping between IDs and classes in [Weibo CateID mapping](http://pan.baidu.com/s/1dE1D1Pf) 
 
 ### 3.3 FCNN Training
 
