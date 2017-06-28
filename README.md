@@ -14,7 +14,7 @@ The new CNN, which is called **FCNN (Frames Supported Convolution Neural Network
 
 <img src="https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/fcnn_arch.jpg" width = "450" alt="figure-2. The architecture of FCNN" align=center />
 
-***figure-2. The architecture of FCNN***
+***figure-2. The architecture of Weibo-FCNN***
 
 ## 1. Requirements
 
