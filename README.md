@@ -41,11 +41,11 @@ git clone https://github.com/fengyoung/video_embedding.git <YOUR REPO PATH>
 ## 3. How to Use
 
 Some resources and testing models are provided, such as:
-[Graph file of Inception-v3](http://pan.baidu.com/s/1qYjWy4G)
 
-
-
-
+- [Inception-v3](http://pan.baidu.com/s/1qYjWy4G): Graph file of inception-v3. 
+- [FCNN model](): trained FCNN model based on Weibo-MCN Classification data set. 
+- [2 short videos](http://pan.baidu.com/s/1qYDc8pQ): short videos for testing of features extraction or classification. 
+- [Weibo-MCN Video-Mat-Set](): 60,000+ video-matrices of Weibo-MCN classification data set in format of tfrecord proto. 
 
 ### 3.1 Video Features Extraction
 
