@@ -54,136 +54,58 @@ There are 2 types of features extraction to get **Video-Matrix** & **Video-Vecto
 (1) The Video-Matrix could be extracted from a video file by using "video2mat.py" like: 
 ```
 cd <THIS REPO>
-python video2mat.py --graph_file <inception-v3 graph file> --input <short video file> --output <video-matrix file>
+python video2mat.py --graph_file <inception-v3 graph file> --input <video file> --output <output video-matrix file>
 ```
-You can find other argumets of "video2mat.py" by: 
+You can get the usage and argumets description by using "-h", like: 
 ```
 python video2mat.py -h
 ```
 
+(2) The Video-Vector could be extracted from a video file by using "video2vec.py" like:
+```
+python video2vec.py --graph_file <inception-v3 graph file> --fcnn_model <FCNN model file> --input_file <video file> --output_file <output video-vector file>
+```
+
+(3) The Video-Vector also could be extracted from a Video-Matrix by using "vmat2vec.py" like: 
+```
+python vmat2vec.py --fcnn_model <FCNN model file> --input_file <input VMP file> --output_file <output video-vector file>
+```
+
 ### 3.2 Video Classification
+
+FCNN could be used for video classification. The example is "video_classify.py":
+```
+python video_classify.py --graph_file <inception-v3 graph file> --fcnn_model <FCNN model file> --input_file <video file>
+```
+Then predicted probilities and corresponding classes would be printed on the screen. Each class is encode to a ingeter ID, you can find the mapping between IDs and classes in [Weibo CateID mapping]() 
 
 ### 3.3 FCNN Training
 
-
-
-
-
-
-
-
-
+You can construct your own classification video data set, extract Video-Matrices and generate VMP files in tfrecord proto as your own training set. Or you can use **Weibo-MCN Video-Mat-Set**, which provided before, to train a new FCNN model. Like: 
 ```
-./config	                       		 // config examples
-./data/label_14k                         // label mapping of sample data set
-./data/wb_14k_h30w2048_pattern_v2_part   // sample data in string proto
-./data/wb_14k_h30w2048_tfrecord_v2_part  // sample data in tfrecord proto
-./model/mcn_14k_c30_fcnn_model           // a completed FCNN model based on 14,000 weibo MCN videos
-./video_embedding/comm                   // comm package  source code in python 
-./video_embedding/image_embedding		 // implement of image embedding
-./video_embedding/framdes_embedding		 // implement of frames embedding
-./video_embedding/tools                  // some useful tools for label collection, format converting, ...
+python train_fcnn.py --vmp_path <VMP path> --naming <NAMING> --model_path <MODEL_PATH> --epoch 100 --batch_size 10
+```
+Arguments of "train_fcnn.py" are as follow:
+```
+--vmp_path VMP_PATH
+  Training VMP data path. Tfrecord proto supported only
+--naming NAMING
+  The name of this model. Determine the path to save checkpoint and events file.
+--model_path MODEL_PATH
+  Root path to save checkpoint and events file. The final path would be <model_path>/<naming>
+--epoch EPOCH
+  Epoch times. Default is 100
+--batch_size BATCH_SIZE
+  How many samples should be used in one time of model updating. Default is 50
 ```
 
-## 4. How to Use
+## 4. Data Proto
 
-### 4.1 Configure
+There are two supported types of the Video-Matrix Patterns (VMP): pattern-string & tfrecord. 
 
-You can find the example of configure in ***./config***
+Specially, Video-Vector can be regarded as a type of Video-Matrix which contains 1 frame only.
 
-The proto of configure is as following: 
-
-```
-{
-	"fcnn_arch":	# FCNN architecture parameters 
-	{
-		"in_height": 30,	# height of input video matrix  
-		"in_width": 2048,	# width of input video matrix  
-		"frame_conv_layers":	# Frame Convolutional Layers 
-		[
-			{ 
-				"conv_h": 4,		# height of conv core 
-				"o_channels": 32,	# number of channels of current layer
-				"pool_h": 2			# max-pooling height
-			},
-			{"conv_h": 4, "o_channels": 16, "pool_h": 2},
-			{"conv_h": 3, "o_channels": 8, "pool_h": 2},
-			{"conv_h": 3, "o_channels": 4, "pool_h": 2},
-			{"conv_h": 2, "o_channels": 2, "pool_h": 2},
-			{"conv_h": 2, "o_channels": 1, "pool_h": 2}
-		],
-		"dense_conn_layers":
-		[
-			{"o_size": 1024} # output size of densely connect layer
-		],
-		"out_size": 28		# out size of FCNN
-	},
-	"train_params":	# training parameters
-	{
-		"max_epochs": 100, 
-		"early_stop": -1,
-		"batch_size": 100,
-		"shuffle": false,
-		"epsilon": 0.1 
-	}
-}
-```
-
-
-### 4.2 Training a FCNN model
-
-You can excute following shells to train an FCNN model for example. 
-
-```
-cd ./video_embedding/
-python3.4 fcnn_train.py ../../config/video2vec_fcnn_config.json ../../data/wb_14k_h30w2048_tfrecord_v2_part/ ./out_model 
-```
-
-The model would be trained from video-matrix pattern data in *"../../data/wb_14k_h30w2048_tfrecord_v2_part/"*, and output to *"./out_model"*.
-
-*"../../config/video2vec_fcnn_config.json"* is the configure file. 
-
-
-
-### 4.3 Classification
-
-You can excute following shells to classify each sample from pattern files. 
-
-```
-cd ./video_embedding/
-python3.4 fcnn_pred.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30w2048_pattern_v2_part pattern
-```
-
-*"../../model/mcn_14k_c30_fcnn_model/"* is a prepared FCNN model. 
-
-*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the path of testing samples. 
-
-*"pattern"* indicates the suffix of file in samples path
-
-
-### 4.4 Video-Level Feature Extraction (Video2Vec)
-
-You can excute following shells to extract the Video-Vec from pattern files. 
-
-```
-cd ./video_embedding/
-python3.4 video2vec.py ../../model/mcn_14k_c30_fcnn_model/ ../../data/wb_14k_h30w2048_pattern_v2_part pattern ./video_vec.out
-```
-
-*"../../model/mcn_14k_c30_fcnn_model/"* is a prepared FCNN model. 
-
-*"../../data/wb_14k_h30w2048_pattern_v2_part"* is the path of testing samples
-
-*"pattern"* indicates the suffix of file in samples path
-
-*"./video_vec.out"* is the out file 
-
-
-## 5. Important
-
-There are two supported types of the Video-Matrix Patterns (VMP): pattern-string & tfrecord-example 
-
-### 5.1 Pattern-String proto (v2)
+### 4.1 Pattern-String proto
 
 ```
 mid,labelid0_labelid1_labelid2,height_width,x0_x1_x2_..._xn
@@ -191,51 +113,42 @@ mid,labelid2_labelid5,height_width,x0_x1_x2_..._xn
 ...
 ```
 
-### 5.2 Tfrecord-Example proto (v2)
-
+### 4.2 Tfrecord proto
 
 ```
 features: {
-	feature: {
-		key: "mid"
-		value: {
-			bytes_list: {
-				value: [mid string]
-			}
-		}
-	}
-	feature: {
-		key: "off"
-		value: {
-			int64_list: {
-				value: [segment offset] 
-			}
-		}
-	}
-	feature: {
-		key: "label"
-		value: {
-			bytes_list: {
-				value: ["0,3,7"]    # labelid list string 
-			}
-		}
-	}
-	feature: {
-		key: "size"
-		value: {
-			int64_list: {
-				value: [v_height, v_width]
-			}
-		}
-	}
-	feature: {
-		key: "feature"
-		value: {
-			float_list: {
-			value: [(v_height * width) float features]
-			}
-		}
-	}
+  feature: {
+    key: "mid"
+    value: {
+      bytes_list: {
+        value: [mid string]
+      }
+    }
+  }
+  feature: {
+    key: "label"
+    value: {
+      bytes_list: {
+        value: ["0,3,7"]    # labelid list string 
+      }
+    }
+  }
+  feature: {
+    key: "size"
+    value: {
+      int64_list: {
+        value: [v_height, v_width]
+      }
+    }
+  }
+  feature: {
+    key: "feature"
+    value: {
+      float_list: {
+        value: [(v_height * width) float features]
+      }
+    }
+  }
 }
 ```
 
