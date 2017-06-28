@@ -6,14 +6,10 @@ Video Embeding can be interpreted as the processing of **Video Features Extracti
 
 However, we don't need the frame details in some video applications, for example, Video-Retrieval, Recommendation etc. So we prepose a new CNN to compress the 2-D Video-Matrix to a 1-D **Video-Vector**. 
 
-![figure-1. The Processing of Video Embedding](https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/video_embedding_01.jpeg)
 <img src="https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/video_embedding_01.jpeg" alt="figure-1. The Processing of Video Embedding" align=center />
 ***figure-1. The Processing of Video Embedding***
 
 The new CNN, which is called **FCNN (Frames Supported Convolution Neural Network)**, contains 6 *f_conv* layers, 1 *densely connect* layer and 1 *softmax* layer. The output of densely connect layer (the last layer before softmax) is the Video-Vector. FCNN is trained by using Weibo-MCN classificated data-set, and it also can be used for video classification.
-
-![figure-2. The architecture of FCNN](https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/fcnn_arch.jpg)
-
 
 <img src="https://raw.githubusercontent.com/fengyoung/video_embedding/master/pic/fcnn_arch.jpg" width = "450" alt="figure-2. The architecture of FCNN" align=center />
 ***figure-2. The architecture of FCNN***
