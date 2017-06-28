@@ -51,7 +51,7 @@ Some resources and testing models are provided, such as:
 
 There are 2 types of features extraction to get **Video-Matrix** & **Video-Vector** respectively: 
 
-(1) The Video-Matrix could be extracted from a video file by using "video2mat.py" like: 
+(1) The Video-Matrix could be extracted from a video file by using ***video2mat.py*** like: 
 ```
 cd <THIS REPO>
 python video2mat.py --graph_file <inception-v3 graph file> --input <video file> --output <output video-matrix file>
@@ -61,7 +61,7 @@ You can get the usage and argumets description by using "-h", like:
 python video2mat.py -h
 ```
 
-(2) The Video-Vector could be extracted from a video file by using "video2vec.py" like:
+(2) The Video-Vector could be extracted from a video file by using ***video2vec.py*** like:
 ```
 python video2vec.py --graph_file <inception-v3 graph file> --fcnn_model <FCNN model file> --input_file <video file> --output_file <output video-vector file>
 ```
@@ -73,7 +73,7 @@ python vmat2vec.py --fcnn_model <FCNN model file> --input_file <input VMP file> 
 
 ### 3.2 Video Classification
 
-FCNN could be used for video classification. The example is "video_classify.py":
+FCNN could be used for video classification. The example is ***video_classify.py***:
 ```
 python video_classify.py --graph_file <inception-v3 graph file> --fcnn_model <FCNN model file> --input_file <video file>
 ```
@@ -81,7 +81,7 @@ Then predicted probilities and corresponding classes would be printed on the scr
 
 ### 3.3 FCNN Training
 
-You can construct your own classification video data set, extract Video-Matrices and generate VMP files in tfrecord proto as your own training set. Or you can use **Weibo-MCN Video-Mat-Set**, which provided before, to train a new FCNN model. Like: 
+You can construct your own classification video data set, extract Video-Matrices and generate VMP files in tfrecord proto as your own training set. Or you can use **Weibo-MCN Video-Mat-Set**, which provided before, to train a new FCNN model by using ***train_fcnn.py***. Like: 
 ```
 python train_fcnn.py --vmp_path <VMP_PATH> --naming <NAMING> --model_path <MODEL_PATH> --epoch 100 --batch_size 10
 ```
