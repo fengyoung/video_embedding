@@ -66,7 +66,7 @@ python video2mat.py -h
 python video2vec.py --graph_file <inception-v3 graph file> --fcnn_model <FCNN model file> --input_file <video file> --output_file <output video-vector file>
 ```
 
-(3) The Video-Vector also could be extracted from a Video-Matrix by using "vmat2vec.py" like: 
+(3) The Video-Vector also could be extracted from a Video-Matrix by using ***vmat2vec.py*** like: 
 ```
 python vmat2vec.py --fcnn_model <FCNN model file> --input_file <input VMP file> --output_file <output video-vector file>
 ```
